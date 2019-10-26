@@ -25,7 +25,6 @@
     "@ngrx/store": "^8.4.0",
     "@ngrx/store-devtools": "^8.4.0",
     "angular-svg-icon": "^8.0.0",
-    "angular-traversal": "^1.2.4",
     "core-js": "^2.5.4",
     "grange": "^1.4.1",
     "jexl": "^2.2.2",
