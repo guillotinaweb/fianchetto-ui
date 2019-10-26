@@ -37,9 +37,12 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/css/chessboard.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -138,6 +141,41 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ngx-chessboard": {
+      "projectType": "library",
+      "root": "projects/ngx-chessboard",
+      "sourceRoot": "projects/ngx-chessboard/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-chessboard/tsconfig.lib.json",
+            "project": "projects/ngx-chessboard/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-chessboard/src/test.ts",
+            "tsConfig": "projects/ngx-chessboard/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-chessboard/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-chessboard/tsconfig.lib.json",
+              "projects/ngx-chessboard/tsconfig.spec.json"
+            ],
             "exclude": [
               "**/node_modules/**"
             ]

@@ -7,6 +7,7 @@ import { GrangeRootModule } from 'grange';
 import { TraversalModule } from 'angular-traversal';
 import { StoreModule } from '@ngrx/store';
 import { ButtonModule } from 'pastanaga-angular';
+import { NgxChessboardModule } from '../../projects/ngx-chessboard/src/public-api';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ButtonModule } from 'pastanaga-angular';
     GrangeRootModule.forRoot(),
     StoreModule.forRoot({}),
     ButtonModule,
+    NgxChessboardModule,
   ],
   providers: [
     {
