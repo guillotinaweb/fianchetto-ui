@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  backend: 'http://127.0.0.1:8080/db/chessgames',
 };
