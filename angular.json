@@ -22,9 +22,19 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/develop/pastanaga-angular/projects/pastanaga/src/lib/styles"
+              ]
+            },
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "src/develop/pastanaga-angular/projects/pastanaga/src/assets",
+                "output": "assets"
+              }
             ],
             "styles": [
               "src/styles.scss"

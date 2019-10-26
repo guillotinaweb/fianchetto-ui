@@ -1,22 +1,46 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "module": "es2015",
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es5",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2018",
-      "dom"
-    ]
-  }
+    "compileOnSave": false,
+    "compilerOptions": {
+        "baseUrl": "src",
+    "downlevelIteration": true,
+        "outDir": "./dist/out-tsc",
+        "sourceMap": true,
+        "declaration": false,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "target": "es2015",
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "lib": [
+            "es2018",
+            "dom"
+        ],
+        "paths": {
+            "angular-traversal": [
+                "develop/angular-traversal/projects/traversal/src/lib"
+            ],
+            "grange": [
+                "develop/grange/projects/grange/src"
+            ],
+            "grange-core": [
+                "develop/grange-core/projects/grange-core/src"
+            ],
+            "grange-form": [
+                "develop/grange-form/projects/grange-form/src/lib"
+            ],
+            "ngx-schema-form": [
+                "develop/ngx-schema-form/projects/schema-form/src/lib"
+            ],
+            "ngx-state-traverser": [
+                "develop/ngx-state-traverser/projects/ngx-state-traverser/src"
+            ],
+            "pastanaga-angular": [
+                "develop/pastanaga-angular/projects/pastanaga/src"
+            ]
+        }
+    }
 }
