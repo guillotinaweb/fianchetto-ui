@@ -1,0 +1,34 @@
+@import "pastanaga_variables";
+
+:host {
+    display: block;
+
+    header {
+        position: relative;
+        background-color: $white-smoke;
+        padding-left: rythm(1);
+        height: rythm(1)*5;
+
+        a:focus, a:active {
+            box-shadow: none;
+        }
+
+        img {
+            cursor: pointer;
+        }
+
+        pa-button {
+            position: absolute;
+            right: rythm(0.5);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+
+    grange-breadcrumbs {
+        background-color: $azure-light;
+    }
+    main {
+        padding: rythm(2);
+    }
+}

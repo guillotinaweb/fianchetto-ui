@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { GrangeRootModule } from 'grange';
 import { TraversalModule } from 'angular-traversal';
 import { StoreModule } from '@ngrx/store';
+import { ButtonModule } from 'pastanaga-angular';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { StoreModule } from '@ngrx/store';
     TraversalModule,
     GrangeRootModule.forRoot(),
     StoreModule.forRoot({}),
+    ButtonModule,
   ],
   providers: [
     {
