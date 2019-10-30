@@ -8,10 +8,16 @@ import { TraversalModule } from 'angular-traversal';
 import { StoreModule } from '@ngrx/store';
 import { ButtonModule } from 'pastanaga-angular';
 import { NgxChessboardModule } from '../../projects/ngx-chessboard/src/public-api';
+import { GameComponent } from "./game.component";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    GameComponent,
+  ],
+  entryComponents: [
+    GameComponent,
   ],
   imports: [
     BrowserModule,
@@ -20,6 +26,7 @@ import { NgxChessboardModule } from '../../projects/ngx-chessboard/src/public-ap
     StoreModule.forRoot({}),
     ButtonModule,
     NgxChessboardModule,
+    HttpClientModule,
   ],
   providers: [
     {

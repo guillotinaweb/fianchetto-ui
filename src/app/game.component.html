@@ -1,0 +1,6 @@
+    <ngx-chessboard #chessboard [(position)]="position"
+                    [draggable]=true
+                    [dropOffBoard]="'snapback'" (drop)="move($event)"></ngx-chessboard>
+
+    <pa-button (click)="resetBoard()">Reset Game</pa-button>
+    <pa-button (click)="join()">Play</pa-button>
