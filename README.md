@@ -1,6 +1,18 @@
-# Fianchetto
+# Fianchetto UI
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9.
+This project is intended to be run with https://github.com/guillotinaweb/fianchetto, a headless chess server created in Guillotina.
+
+## Further Reading
+
+Grange: https://github.com/guilloutinaweb/grange
+
+NG2 Chessboard in Angular 8: https://github.com/ebrehault/ngx-chessboard
+
+NG2 Chessboard original angular project: https://github.com/loicmarie/ng2-chessboard
+
+Chessboardjs reference: https://chessboardjs.com/index.html
+
+Websockets in Guillotina: https://guillotina.readthedocs.io/en/latest/training/extending/websockets.html#using-websockets
 
 ## Development server
 

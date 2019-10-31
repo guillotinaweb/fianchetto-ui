@@ -1,6 +1,6 @@
 <header>
     <a href="#" [traverseTo]="'/'">
-        <img height="64" src="assets/logo.svg" />
+        <img height="64" src="assets/logo.png" />
     </a>
     <h1>Fianchetto</h1>
     <pa-button *ngIf="isAuthenticated" (click)="logout()" icon="log-out" color="secondary"></pa-button>
@@ -8,9 +8,6 @@
 <grange-breadcrumbs *ngIf="isAuthenticated"></grange-breadcrumbs>
 <main>
     <traverser-outlet></traverser-outlet>
-    <ngx-chessboard position="start"
-                    [draggable]=true
-                    [dropOffBoard]="snapback"></ngx-chessboard>
 
 </main>
 <grange-toast-container></grange-toast-container>
