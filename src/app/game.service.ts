@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from "rxjs";
-import {map, takeUntil} from "rxjs/operators";
-import {Resource} from "grange-core";
-import {TraverserSelectors} from "ngx-state-traverser";
-import {Grange} from "grange";
-import {AuthenticationService} from "grange-core";
-import { WebSocketSubject} from 'rxjs/webSocket';
-import {Message} from "@angular/compiler/src/i18n/i18n_ast";
-import { webSocket } from "rxjs/webSocket";
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject, Subject } from "rxjs";
+import { takeUntil}  from "rxjs/operators";
+import { Resource } from "grange-core";
+import { TraverserSelectors } from "ngx-state-traverser";
+import { Grange } from "grange";
+import { AuthenticationService } from "grange-core";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { WebsocketService } from "./websocket.service";
 
 export interface Move {
@@ -21,19 +17,14 @@ export interface Move {
   target: string;
 }
 
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
   private destroy = new Subject();
   context = TraverserSelectors.TraverserContext<Resource>(this.grange.store).pipe(takeUntil(this.destroy));
-  game = null;
-  token  = null;
-  websocket = null;
-  public moves = null;
-  public messages: Subject<Message>;
+  // FIXME: at the moment it's working ok without type. but should be fixed.
+  moves = null;
 
   constructor(
     public grange: Grange,
@@ -43,26 +34,22 @@ export class GameService {
   ) {
 
   }
+
   makeMove(move: Move) {
-    console.log('Moving:', move.piece, 'from:', move.source, 'to:', move.target);
-    /* This is where we will send moves to the websocket */
-    // create observable
-    const message = {
-      author: "jon",
-      message: move,
-    }
-    this.moves.next("this is the move");
+    this.moves.next(move);
   }
 
+  // This is listened to by the chessboard component and updates the 'position' of all pieces
+  // Ie this is the position= argument on <ng-chessboard>
   position = new BehaviorSubject<string>(''); // board state
 
   reset(): void {
     this.position.next('start');
   }
 
-
   join(): void{
-    const position = this.position;
+    // TODO: at the moment I can't figure out how to use grange.api.get with custom authentication header
+    // Otherwise it should be simpler method
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -70,26 +57,35 @@ export class GameService {
         'Authorization': 'Basic cm9vdDpyb290'
       })
     };
+    
+    // FIXME: Not sure why I am having to subscribe to the context here? Is there an easier way to get context.id?
     this.context.subscribe((data)=> {
-      this.game = data;
-      const parent = this.game['parent'];
+      let game = data;
+      let parent = game['parent'];
       this.http.get(parent['@id'] + '/@wstoken', httpOptions).subscribe((subdata) => {
-        console.log('Auth Token:', subdata['token']) ;
-        this.token = subdata['token'];
-        // need to connect to a ws:// url here
-        //TODO: generate the url from the context
-        const url = 'ws://localhost:8080/db/chess/mytestgame/@test?ws_token=' + this.token;
+        const token = subdata['token'];
+        
+        //FIXME: generate the ws:// url from the context
+        const url = 'ws://localhost:8080/db/chess/mytestgame/@simple?ws_token=' + token;
         this.moves = this.wsService.connect(url);
-        this.moves.subscribe((move) =>{
-          console.log('Move received from stream');
-          this.handleMove(move);
+        this.moves.subscribe((message: MessageEvent) =>{
+          // Handle incoming messages. In future we will want more than just moves.
+          // Maybe something to parse/dispatch generic messages?
+          this.handleMove(message);
         })
-        position.next('start');
+
+        /* For now just set the board to the default start position on connection. 
+            Would be better to draw position from last available move on the game,
+            which would allow rejoining an existing game.
+        */
+        this.position.next('start');
       });
     });
   }
 
-  handleMove(move): void {
-    console.log('Incoming move:', move)
+  handleMove(message: MessageEvent): void {
+    // FIXME: surely the message doesn't need to be parsed like this?
+    const newPos = JSON.parse(JSON.parse(message.data)[1])['newPos']
+    this.position.next(newPos)
   }
 }

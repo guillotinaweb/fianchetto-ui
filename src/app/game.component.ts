@@ -20,8 +20,6 @@ export class GameComponent {
       });
     }
 
-
-
     move(move: Move) {
       this.GameService.makeMove(move)
     }
